@@ -31,7 +31,7 @@ build: [make "-j%{jobs}%"]
 install: [make "install"]
 depends: [
   "coq" {>= "9.0"}
-  "num" 
+  "zarith"
   "ocamlbuild" {build}
 ]
 

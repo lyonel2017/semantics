@@ -1,5 +1,5 @@
 %{
-  open Big_int
+  open Big_int_Z
   open String
   open Str_little
   open Str
@@ -25,7 +25,7 @@ let rec mk_precs l i =
 %}
 %token VARIABLES IN END WHILE DO DONE ASSIGN PLUS MINUS COMMA CONJ BANG
 %token SEMICOLON OPEN CLOSE BOPEN BCLOSE SKIP LT SOPEN SCLOSE MINFTY PINFTY
-%token <Big_int.big_int> NUM
+%token <Big_int_Z.big_int> NUM
 %token <string> ID
 %left PLUS
 %right CONJ

@@ -1,4 +1,4 @@
-open Big_int
+open Big_int_Z
 open Parse_little
 open Interp
 open Str_little

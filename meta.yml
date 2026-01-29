@@ -53,9 +53,9 @@ supported_coq_versions:
 
 dependencies:
 - opam:
-    name: num
+    name: zarith
   description: |-
-    [num](https://opam.ocaml.org/packages/num/)
+    [num](https://opam.ocaml.org/packages/Zarith/)
 - opam:
     name: ocamlbuild
     version: '{build}'
