@@ -12,3 +12,4 @@ test_vcg.lil: ex_int.lil little.native
 clean::
 	rm -f Makefile.coq Makefile.coq.conf interp.ml*
 	rm -rf _build little.native proof_sqrt.v test_vcg.lil
+	rm -f parse_little.ml parse_little.mli
