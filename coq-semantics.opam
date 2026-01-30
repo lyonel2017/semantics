@@ -30,8 +30,8 @@ worked with older version of Coq
 build: [make "-j%{jobs}%"]
 install: [make "install"]
 depends: [
-  "coq" {>= "9.0"}
-  "num" 
+  "rocq-stdlib" {>= "9.0"}
+  "zarith"
   "ocamlbuild" {build}
 ]
 
