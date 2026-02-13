@@ -1,6 +1,7 @@
 ---
 fullname: Semantics
 shortname: semantics
+opam_name: coq-semantics
 namespace: Semantics
 organization: coq-community
 community: true
@@ -14,17 +15,17 @@ synopsis: >-
 description: |
   This is a survey of programming language semantics styles
   for a miniature example of a programming language, with their encoding
-  in Coq, the proofs of equivalence of different styles, and the proof
+  in Rocq (Coq), the proofs of equivalence of different styles, and the proof
   of soundess of tools obtained from axiomatic semantics or abstract
-  interpretation.  The tools can be run inside Coq, thus making them
+  interpretation.  The tools can be run inside Rocq, thus making them
   available for proof by reflection, and the code can also be extracted
   and connected to a yacc-based parser, thanks to the use of a functor
   parameterized by a module type of strings.  A hand-written parser is
-  also provided in Coq, but there are no proofs associated.
+  also provided in Rocq, but there are no proofs associated.
 
   The current version is only compatible with a recent version of Rocq
-  (tested with version 9.0) but previous versions of this repository
-  worked with older version of Coq
+  (tested with versions 9.0 to 9.1) but previous versions of this repository
+  worked with older version of Rocq and Coq
 
 doi: 10.1017/CBO9780511770524.016
 
@@ -38,10 +39,10 @@ authors:
   initial: true
 
 maintainers:
-- name: Kartik Singhal
-  nickname: k4rtik
+- name: Yves Bertot
+  nickname: ybertot
 
-opam-file-maintainer: kartiksinghal@gmail.com
+opam-file-maintainer: yves.bertot@inria.fr
 
 license:
   fullname: MIT License
@@ -53,7 +54,9 @@ supported_coq_versions:
 
 dependencies:
 - opam:
-    name: num
+    name: rocq-stdlib
+- opam:
+    name: zarith
   description: |-
     [num](https://opam.ocaml.org/packages/num/)
 - opam:
@@ -81,7 +84,7 @@ categories:
 documentation: |
   ## Description
   These files describe several approaches to the description of a simple
-  programming language using the Coq system.
+  programming language using the Rocq (formerly Coq) system.
 
   `syntax.v` the constructs of the language
 
@@ -117,14 +120,14 @@ documentation: |
 
   `little_w_string.v`  The whole development is defined as a set of modules
     parameterized by a notion of strings.  This file instantiate the development
-    on the string package provided in Coq.
+    on the string package provided in Rocq.
 
   `parser.v` A parser for the language and assertions, which can be hooked on all
     the tools.  This is nice for the examples.  There are no proofs on this
     parser, and when parsing fails, it simply returns the "skip" program.
 
   `example.v`, `example2.v`, `ex_i.v`  These are examples where the abstract interpreter,
-    and the vcg are used in a reflective manner directly inside Coq.
+    and the vcg are used in a reflective manner directly inside Rocq.
 
   `extract_interpret.v`  This file contains the directives to extract code from
     the proved tools.
@@ -156,6 +159,6 @@ documentation: |
     options:
     - `-interpreter` (just to execute a program)
     - `-vcg` (to generate the conditions for the verification of an annotated program)
-    - `-vcg-coq` (to generatedthe conditions in coq syntax)
+    - `-vcg-coq` (to generate the conditions in coq syntax)
     - `-static-analysis` (to run the abstract interpreter).
 ---
