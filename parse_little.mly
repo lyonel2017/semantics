@@ -1,19 +1,23 @@
 %{
-  open Big_int
+(* This code is actually taken into account after the token declarations.
+   so no module renaming is taken into account when declaring the tokens. *)
   open String
   open Str_little
   open Str
+(* Beware that module Interp should not be opened, to avoid that Inter.Z hides
+   the Z module from zarith. *)
+
 
 (* Making Coq data. *)
 
-let big_int2 = big_int_of_int 2
+let big_int2 = Z.of_int 2
 
 let z_of_big_int n =
-    let rec f n = if eq_big_int n unit_big_int then Interp.XH
-                else let q,r = quomod_big_int n big_int2 in
-                  if eq_big_int r unit_big_int then Interp.XI(f q)
+    let rec f n = if Z.equal n Z.one then Interp.XH
+                else let q,r = Z.div_rem n big_int2 in
+                  if Z.equal r Z.one then Interp.XI(f q)
                   else Interp.XO(f q) in
-  if eq_big_int n zero_big_int then Interp.Z0 else Interp.Zpos(f n)
+  if Z.equal n Z.zero then Interp.Z0 else Interp.Zpos(f n)
 
 let p a b = Interp.Pair(a, b)
 let c a b = Interp.Cons(a, b)
@@ -25,7 +29,7 @@ let rec mk_precs l i =
 %}
 %token VARIABLES IN END WHILE DO DONE ASSIGN PLUS MINUS COMMA CONJ BANG
 %token SEMICOLON OPEN CLOSE BOPEN BCLOSE SKIP LT SOPEN SCLOSE MINFTY PINFTY
-%token <Big_int.big_int> NUM
+%token <Z.t> NUM
 %token <string> ID
 %left PLUS
 %right CONJ

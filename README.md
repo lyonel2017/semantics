@@ -28,17 +28,17 @@ Follow the instructions on https://github.com/coq-community/templates to regener
 
 This is a survey of programming language semantics styles
 for a miniature example of a programming language, with their encoding
-in Coq, the proofs of equivalence of different styles, and the proof
+in Rocq (Coq), the proofs of equivalence of different styles, and the proof
 of soundess of tools obtained from axiomatic semantics or abstract
-interpretation.  The tools can be run inside Coq, thus making them
+interpretation.  The tools can be run inside Rocq, thus making them
 available for proof by reflection, and the code can also be extracted
 and connected to a yacc-based parser, thanks to the use of a functor
 parameterized by a module type of strings.  A hand-written parser is
-also provided in Coq, but there are no proofs associated.
+also provided in Rocq, but there are no proofs associated.
 
 The current version is only compatible with a recent version of Rocq
-(tested with version 9.0) but previous versions of this repository
-worked with older version of Coq
+(tested with versions 9.0 to 9.1) but previous versions of this repository
+worked with older version of Rocq and Coq
 
 
 ## Meta
@@ -46,10 +46,24 @@ worked with older version of Coq
 - Author(s):
   - Yves Bertot (initial)
 - Rocq-community maintainer(s):
-  - Kartik Singhal ([**@k4rtik**](https://github.com/k4rtik))
+  - Yves Bertot ([**@ybertot**](https://github.com/ybertot))
 - License: [MIT License](LICENSE)
 - Compatible Rocq/Coq versions: 9.0 or later
 - Additional dependencies:
+  - This is a survey of programming language semantics styles
+for a miniature example of a programming language, with their encoding
+in Rocq (Coq), the proofs of equivalence of different styles, and the proof
+of soundess of tools obtained from axiomatic semantics or abstract
+interpretation.  The tools can be run inside Rocq, thus making them
+available for proof by reflection, and the code can also be extracted
+and connected to a yacc-based parser, thanks to the use of a functor
+parameterized by a module type of strings.  A hand-written parser is
+also provided in Rocq, but there are no proofs associated.
+
+The current version is only compatible with a recent version of Rocq
+(tested with versions 9.0 to 9.1) but previous versions of this repository
+worked with older version of Rocq and Coq
+
   - [num](https://opam.ocaml.org/packages/num/)
   - [ocamlbuild](https://github.com/ocaml/ocamlbuild)
 - Rocq/Coq namespace: `Semantics`
@@ -62,25 +76,19 @@ The easiest way to install the latest released version of Semantics
 is via [OPAM](https://opam.ocaml.org/doc/Install.html):
 
 ```shell
-opam repo add coq-released https://coq.inria.fr/opam/released
+opam repo add rocq-released https://rocq-prover.org/opam/released
 opam install coq-semantics
 ```
 
-To instead build and install manually, you may encounter difficulties making
-sure that all dependencies for the compilation are present.  The dependencies
-are already declared in the `opam` package description, so it is better
-to rely on `opam` to compile dependencies with the following two lines:
+To instead build and install manually, you need to make sure that all the
+libraries this development depends on are installed.  This easiest to do that
+is still to rely on opam:
 
-```shell
-opam repo add coq-released https://coq.inria.fr/opam/released
-opam install --deps-only coq-semantics
-```
-
-You can then download the source and compile them as follows:
-
-```shell
+``` shell
 git clone https://github.com/coq-community/semantics.git
 cd semantics
+opam repo add rocq-released https://rocq-prover.org/opam/released
+opam install --deps-only .
 make   # or make -j <number-of-cores-on-your-machine> 
 make install
 ```
@@ -88,7 +96,7 @@ make install
 
 ## Description
 These files describe several approaches to the description of a simple
-programming language using the Coq system.
+programming language using the Rocq (formerly Coq) system.
 
 `syntax.v` the constructs of the language
 
@@ -124,14 +132,14 @@ programming language using the Coq system.
 
 `little_w_string.v`  The whole development is defined as a set of modules
   parameterized by a notion of strings.  This file instantiate the development
-  on the string package provided in Coq.
+  on the string package provided in Rocq.
 
 `parser.v` A parser for the language and assertions, which can be hooked on all
   the tools.  This is nice for the examples.  There are no proofs on this
   parser, and when parsing fails, it simply returns the "skip" program.
 
 `example.v`, `example2.v`, `ex_i.v`  These are examples where the abstract interpreter,
-  and the vcg are used in a reflective manner directly inside Coq.
+  and the vcg are used in a reflective manner directly inside Rocq.
 
 `extract_interpret.v`  This file contains the directives to extract code from
   the proved tools.
@@ -163,6 +171,6 @@ llex.mll the lexical analyser to be used with the parser.
   options:
   - `-interpreter` (just to execute a program)
   - `-vcg` (to generate the conditions for the verification of an annotated program)
-  - `-vcg-coq` (to generatedthe conditions in coq syntax)
+  - `-vcg-coq` (to generate the conditions in coq syntax)
   - `-static-analysis` (to run the abstract interpreter).
 

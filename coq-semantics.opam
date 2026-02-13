@@ -2,7 +2,7 @@
 # Follow the instructions on https://github.com/coq-community/templates to regenerate.
 
 opam-version: "2.0"
-maintainer: "kartiksinghal@gmail.com"
+maintainer: "yves.bertot@inria.fr"
 version: "dev"
 
 homepage: "https://github.com/coq-community/semantics"
@@ -14,24 +14,25 @@ synopsis: "A survey of semantics styles, from natural semantics through structur
 description: """
 This is a survey of programming language semantics styles
 for a miniature example of a programming language, with their encoding
-in Coq, the proofs of equivalence of different styles, and the proof
+in Rocq (Coq), the proofs of equivalence of different styles, and the proof
 of soundess of tools obtained from axiomatic semantics or abstract
-interpretation.  The tools can be run inside Coq, thus making them
+interpretation.  The tools can be run inside Rocq, thus making them
 available for proof by reflection, and the code can also be extracted
 and connected to a yacc-based parser, thanks to the use of a functor
 parameterized by a module type of strings.  A hand-written parser is
-also provided in Coq, but there are no proofs associated.
+also provided in Rocq, but there are no proofs associated.
 
 The current version is only compatible with a recent version of Rocq
-(tested with version 9.0) but previous versions of this repository
-worked with older version of Coq
+(tested with versions 9.0 to 9.1) but previous versions of this repository
+worked with older version of Rocq and Coq
 """
 
 build: [make "-j%{jobs}%"]
 install: [make "install"]
 depends: [
-  "coq" {>= "9.0"}
-  "num" 
+  "rocq-core" {>= "9.0"}
+  "rocq-stdlib" {>= "9.0"}
+  "zarith" {>= "1.11"}
   "ocamlbuild" {build}
 ]
 
